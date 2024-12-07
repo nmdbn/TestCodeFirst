@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TestCodeFirst.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Book List</h1>
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <!-- Display Book Image -->
+                    <img src="@item.Image" class="card-img-top" alt="Book Image" style="height: 200px; object-fit: cover;" />
+
+                    <div class="card-body">
+                        <!-- Display Title -->
+                        <h5 class="card-title text-truncate">@item.Title</h5>
+
+                        <!-- Display Author -->
+                        <p class="card-text">
+                            <strong>Author:</strong> @item.Author
+                        </p>
+
+                        <!-- Display Price -->
+                        <p class="card-text">
+                            <strong>Price:</strong> $@item.Price
+                        </p>
+
+                        <!-- Display Description -->
+                        <p class="card-text text-truncate">
+                            <strong>Description:</strong> @item.Description
+                        </p>
+
+                        <!-- Display Category -->
+                        <p class="card-text">
+                            <strong>Category:</strong> @item.Category.CategoryName
+                        </p>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between">
+                        <!-- Actions -->
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-lg">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-lg">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-lg">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
